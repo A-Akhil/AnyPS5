@@ -1286,7 +1286,7 @@ bool StorageTexture::Refresh() {
                 // to the current generation, so the whole-surface check answers next time.
                 scanBlocks();
                 for (std::uint32_t unit = 0; unit < trackedLayers; ++unit) {
-                    if (stampedBlocks[unit] == 0) {
+                    if (stampedBlocks[unit] == 0 || (stampedBlocks[unit] == GuestMemory::BlockMaybeWritten && layerPending[unit])) {
                         layerGeneration[unit] = current;
                         continue;
                     }
